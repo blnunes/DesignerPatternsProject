@@ -68,7 +68,7 @@ public class ComposicaoHeranca {
     static class Human implements Driver {
         @Override
         public void navigate() {
-            System.out.println("Pilotatado por um humano");
+            System.out.println("Pilotado por um humano");
         }
     }
 
