@@ -3,40 +3,28 @@ package br.com.nunes.estudos;
 public class ComposicaoHeranca {
 
     public static void main(String[] args) {
-        Transport transport1 = new Transport();
-        transport1.setD(new Human());
-        transport1.setE(new CombustionEngine());
-
-        Transport transport2 = new Transport();
-        transport2.setE(new EletricEngine());
-        transport2.setD(new Robot());
-
-        transport1.getD().navigate();
-        transport1.getE().move();
-        System.out.println("-----------");
-        transport2.getD().navigate();
-        transport2.getE().move();
+        Transport transport1 = new Transport(new CombustionEngine(), new Human());
+        Transport transport2 = new Transport(new EletricEngine(), new Robot());
+        transport1.deliver(new Destination("Taguatinga "), new Cargo("PlayStation 5"));
+        transport2.deliver(new Destination("Japão "), new Cargo("Coxinha"));
 
     }
+
+
     static class Transport{
         private Engine e;
         private Driver d;
 
-        public Driver getD() {
-            return d;
-        }
-
-        public Engine getE() {
-            return e;
-        }
-
-        public void setD(Driver d) {
+        Transport(Engine e, Driver d){
+            this.e = e;
             this.d = d;
         }
-
-        public void setE(Engine e) {
-            this.e = e;
+        private void deliver(Destination destination, Cargo cargo) {
+            System.out.println("Enviando carga: "+cargo.carga+ " pro destino: "+destination.destino);
+            e.move();
+            d.navigate();
         }
+
 
         @Override
         public String toString() {
@@ -75,16 +63,26 @@ public class ComposicaoHeranca {
             System.out.println("Pilotado por um robo");
         }
 
-        @Override
-        public String toString() {
-            return "Navegação robótica";
-        }
     }
 
     static class Human implements Driver {
         @Override
         public void navigate() {
-            System.out.println("Piloatado por um humano");
+            System.out.println("Pilotatado por um humano");
+        }
+    }
+
+    static class Destination {
+        String destino;
+        Destination(String destination){
+            this.destino = destination;
+        }
+    }
+
+    static class Cargo {
+        String carga;
+        Cargo(String cargo){
+            this.carga = cargo;
         }
     }
 }
