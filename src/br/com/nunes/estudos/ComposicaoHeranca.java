@@ -10,7 +10,13 @@ public class ComposicaoHeranca {
 
     }
 
-
+    /*
+        Para não criar várias classes especializadas como:
+        - CombustionEngine.class ou EletricEngine.class
+        e não criar vários tipos pilotos, criamos uma interface com todos comportamentos necessários
+        para o funcionamento de um Motor e Piloto e caso necessário dentro da classe especializada
+        são criados os comportamentos padrões
+     */
     static class Transport{
         private Engine e;
         private Driver d;
